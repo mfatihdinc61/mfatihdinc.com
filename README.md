@@ -21,15 +21,15 @@ This is the source code of my portfolio website [mfatihdinc.com](https://mfatihd
 
 ## 🗂 Project Structure (Simplified)
 
-mysite/
-├── personal/ # Main Django app (views, models, urls, etc.) 
-│ ├── templates/ 
-│ └── static/ 
-├── staticfiles/ # Static files collected by Django 
-├── media/ # Uploaded media (optional) 
-├── manage.py 
-├── requirements.txt 
-└── passenger_wsgi.py # Entry point for cPanel Passenger 
+mysite/<br>
+├── personal/ # Main Django app (views, models, urls, etc.)<br> 
+│ ├── templates/<br> 
+│ └── static/<br> 
+├── staticfiles/ # Static files collected by Django <br>
+├── media/ # Uploaded media<br>
+├── manage.py <br>
+├── requirements.txt<br> 
+└── passenger_wsgi.py # Entry point for cPanel Passenger <br>
 
 
 ## 🛠 Setup & Deploy (Quick)
