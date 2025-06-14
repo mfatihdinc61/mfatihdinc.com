@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fatih Portfolio</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+  <style>
+    :root {
+      --bg: #1e1e1e;
+      --accent: #58a6ff;
+      --text: #f1f1f1;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: var(--bg);
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      text-align: center;
+      flex: 1;
+    }
+
+    .fth {
+      font-size: 5rem;
+      color: var(--accent);
+      letter-spacing: 0.1rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.2rem;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 2.5s;
+    }
+
+    .fatih{
+      display: flex;
+    }
+    .ai {
+      font-size: 5rem;
+      color: white;
+      letter-spacing: 0.1rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.2rem;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    .extra-label {
+      position: absolute;
+      color: var(--accent);
+      font-size: 1rem;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    #muhammet {
+      top: -2.2rem;
+      left: 50%;
+      transform: translateX(-120%);
+      animation-delay: 2.8s;
+    }
+
+    #dinc {
+      bottom: -2.2rem;
+      right: 50%;
+      transform: translateX(120%);
+      animation-delay: 2.8s;
+    }
+
+    #this-is {
+      top: -0rem;
+      left: 50%;
+      transform: translateX(-120%);
+      white-space: nowrap;
+      animation-delay: 2.5s;
+    }
+
+    #portfolio {
+      bottom: -0.40rem;
+      right: 50%;
+      transform: translateX(100%);
+      white-space: nowrap;
+      animation-delay: 2.5s;
+    }
+    
+    #yukari {
+        position: relative;
+        bottom: 40px;
+    }
+
+
+      .footer {
+    position: absolute;
+    bottom: 1rem;
+    margin-top: 3rem;
+    padding: 2rem 0;
+    text-align: center;
+    background: transparent;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+    animation-delay: 2.5s;
+  }
+
+  .footer-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .footer-icon {
+    color: #58a6ff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .footer-icon:hover {
+    color: white;
+  }
+
+  .footer-tooltip {
+    position: absolute;
+    bottom: -1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .email-icon:hover .footer-tooltip {
+    opacity: 1;
+  }
+
+
+  .navbar {
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto 2rem auto;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  top: 0.5rem;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+  animation-delay: 2.5s;}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+  background-color: #2e2e2e;
+  border-radius: 12px;
+  padding: 0.7rem 1.5rem;
+}
+
+.navbar a {
+  color: #58a6ff;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.navbar a:hover {
+  color: white;
+}
+
+.navbar a.active {
+  color: white;
+}
+
+.navbar a::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  font-size: 0.65rem;
+  padding: 3px 6px;
+  border-radius: 4px;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.navbar a:hover::after {
+  opacity: 1;
+}
+
+
+
+
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+
+      .fatih {
+        font-size: 3rem;
+      }
+      .extra-label {
+        font-size: 0.8rem;
+      }
+    }
+
+
+    .typewriter-text {
+  color: var(--text);
+  font-size: 1.1rem;
+  margin-top: 3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid var(--accent);
+  width: 0;
+  animation: typing 4s steps(40, end) 3s forwards, blink 0.75s step-end infinite;
+  font-family: 'Courier New', Courier, monospace;
+  opacity: 0;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+    opacity: 1;
+  }
+  to {
+    width: 20ch;
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--accent);
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+
+
+<div class = "pageWrapper">
+
+
+<nav class="navbar">
+  <ul>
+    <li>
+      <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}" title="Home">
+        <i class="fas fa-house"></i>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}" title="About">
+        <i class="fas fa-user-astronaut"></i>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'project_list' %}" class="{% if request.path == '/projects/' %}active{% endif %}" title="Projects">
+        <i class="fas fa-diagram-project"></i>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'thought_list' %}" class="{% if request.path == '/thought_list/' %}active{% endif %}" title="Thoughts">
+        <i class="fas fa-pen-nib"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div id="yukari"> 
+
+    <div id="typewriter" class="typewriter-text"></div>
+
+
+  <div class="container">
+    <!-- Step 1: A I -->
+
+    <!-- Step 2: FATIH -->
+    <div class="fatih"><span class="fth">F</span><span class="ai">A</span><span class="fth">T</span><span class="ai">I</span><span class="fth">H</span></div>
+
+    <div class="extra-label" id="this-is">This is MUHAMMET</div>
+    <div class="extra-label" id="portfolio">DINC's portfolio website</div>
+
+  </div>
+</div>
+</div>
+
+
+
+<footer class="footer">
+  <div class="footer-icons">
+    <span class="footer-icon email-icon" onclick="copyEmailFooter()">
+      <i class="fas fa-envelope"></i>
+      <span class="footer-tooltip" id="footer-tooltip">mfatihdinc61@yaani.com</span>
+    </span>
+    <a href="https://github.com/mfatihdinc61" target="_blank" class="footer-icon">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://linkedin.com/in/mfatihdinc61" target="_blank" class="footer-icon">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </div>
+</footer>
+
+
+
+
+<script>
+  function copyEmailFooter() {
+    const email = "mfatihdinc61@yaani.com";
+    navigator.clipboard.writeText(email).then(() => {
+      const tooltip = document.getElementById("footer-tooltip");
+      tooltip.textContent = "Copied!";
+      setTimeout(() => {
+        tooltip.textContent = email;
+      }, 1500);
+    });
+  }
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const typewriter = document.getElementById("typewriter");
+    typewriter.textContent = "AI-focused Developer";
+  });
+</script>
+
+
+
+</body>
+
+</html>

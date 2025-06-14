@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thoughts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #1e1e1e;
+            --text-color: #f1f1f1;
+            --card-bg: #2e2e2e;
+            --link-color: #58a6ff;
+        }
+
+        body.light {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --card-bg: #f9f9f9;
+            --link-color: #0366d6;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', sans-serif;
+            padding: 2rem;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--link-color);
+            color: var(--link-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .thoughts-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .thought-card {
+            background-color: var(--card-bg);
+            padding: 1.2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .thought-card h2 {
+            margin: 0.3rem 0 0.4rem 0;
+        }
+
+        .thought-date {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 0.7rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+        }
+
+
+
+
+
+
+        .navbar {
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto 2rem auto;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border-radius: 12px;
+  padding: 0.7rem 1.5rem;
+}
+
+.navbar a {
+  color: #58a6ff;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.navbar a:hover {
+  color: white;
+}
+
+.navbar a.active {
+  color: white;
+}
+
+.navbar a::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  font-size: 0.65rem;
+  padding: 3px 6px;
+  border-radius: 4px;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.navbar a:hover::after {
+  opacity: 1;
+}
+
+
+    </style>
+</head>
+<body class="dark">
+
+<button class="toggle-btn" onclick="toggleMode()" id="modeToggle">
+  <i class="fa-solid fa-sun" style="color: #74C0FC;"></i>
+</button>
+
+
+<nav class="navbar">
+  <ul>
+    <li>
+      <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}" title="Home">
+        <i class="fas fa-house"></i>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}" title="About">
+        <i class="fas fa-user-astronaut"></i>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'project_list' %}" class="{% if request.path == '/projects/' %}active{% endif %}" title="Projects">
+        <i class="fas fa-diagram-project"></i>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'thought_list' %}" class="{% if request.path == '/thoughts/' %}active{% endif %}" title="Thoughts">
+        <i class="fas fa-pen-nib"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+<h1>Thoughts</h1>
+
+<div class="thoughts-container">
+    {% for thought in thoughts %}
+        <div class="thought-card">
+            <h2>{{ thought.title }}</h2>
+            <div class="thought-date">{{ thought.created_at|date:"d/m/Y" }}</div>
+            <p>{{ thought.description }}</p>
+            <a href="{% url 'thought_detail' slug=thought.slug %}" class="read-more">Read more →</a>
+        </div>
+    {% endfor %}
+
+<!-- Pagination Controls -->
+<div style="text-align: center; margin-top: 2rem;">
+    {% if thoughts.has_previous %}
+        <a href="?page={{ thoughts.previous_page_number }}" style="margin-right: 1rem;"><i class="fa-solid fa-arrow-left" style="color: #74C0FC;"></i></a>
+    {% endif %}
+
+    <span>Page {{ thoughts.number }} of {{ thoughts.paginator.num_pages }}</span>
+
+    {% if thoughts.has_next %}
+        <a href="?page={{ thoughts.next_page_number }}" style="margin-left: 1rem;"><i class="fa-solid fa-arrow-right" style="color: #74C0FC;"></i></a>
+    {% endif %}
+</div>
+
+
+</div>
+
+<script>
+    document.body.classList.add("dark");
+    function toggleMode() {
+        document.body.classList.toggle("light");
+        document.body.classList.toggle("dark");
+
+        const btn = document.getElementById('modeToggle');
+        const icon = btn.querySelector('i');
+
+          if (icon.classList.contains('fa-moon')) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+            // Optional: apply light mode styles here
+          } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+            // Optional: apply dark mode styles here
+          }
+    }
+</script>
+
+
+</body>
+</html>

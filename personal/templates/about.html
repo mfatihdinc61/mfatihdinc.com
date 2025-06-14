@@ -1,0 +1,695 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Me / Résumé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+  <style>
+    :root {
+      --bg-color: #1e1e1e;
+      --text-color: #f1f1f1;
+      --accent: #58a6ff;
+      --hover-accent: #a0cfff;
+      --active-color: #ffffff;
+      --card-bg: #2e2e2e;
+      --link-color: #58a6ff;
+      --muted:#BFB5B2;
+    }
+
+    body.light {
+        --bg-color: #ffffff;
+        --text-color: #000000;
+        --card-bg: #f9f9f9;
+        --link-color: #0366d6;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding-top: 2rem;
+    }
+
+    .profile-pic {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .info h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      margin-top: 0.3rem;
+      color: var(--accent);
+    }
+
+    .info p {
+      margin: 0.2rem 0;
+    }
+
+    .link {
+      color: var(--accent);
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .link i {
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .link:hover i {
+      color: #ffffff; /* Brighter white on hover */
+    }
+
+
+    h2 {
+      color: var(--accent);
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      background-color: var(--card-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .card-img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .title-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .title-line span {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    .tag {
+      background-color: var(--accent);
+      color: black;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-right: 5px;
+    }
+
+
+body {
+  margin: 0;
+  padding-top: 1rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Navbar */
+.page-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 0.5rem; /* Space for navbar */
+  position: relative;
+}
+
+
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      gap: 2rem;
+      top: 2rem;
+      left: 2rem;
+      background: transparent;
+      z-index: 999;
+      /*position: fixed;*/
+    }
+
+    .nav-item {
+      position: relative;
+      color: var(--accent);
+      font-size: 1.8rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--hover-accent);
+    }
+
+    .nav-item.active {
+      color: var(--active-color);
+      text-shadow: 0 0 10px var(--accent);
+    }
+
+      .toggle-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--link-color);
+    color: var(--link-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+    /* Tooltip that follows cursor */
+    .tooltip {
+      position: fixed;
+      background-color: #333;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 1000;
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        gap: 1rem;
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .nav-item {
+        font-size: 1.5rem;
+      }
+    }
+
+}
+
+
+
+@media (max-width: 700px) {
+  .nav-toggle {
+    display: block;
+  }
+
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    background-color: var(--bg-color);
+    width: auto;
+    padding: 1rem;
+    z-index: 5;
+    border: none;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 10px;
+    border-radius: 6px;
+    background-color: var(--card-bg);
+    margin-bottom: 5px;
+  }
+}
+
+
+    @media (max-width: 600px) {
+      .title-line {
+        flex-direction: column;
+        gap: 0.3rem;
+        align-items: center;
+        text-align: center;
+      }
+
+      .card {
+        flex-direction: column;
+        align-items: center;
+
+      }
+
+      .card-img {
+        width: 60%;
+        height: auto;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+      }
+
+      .info {
+        text-align: center;
+      }
+
+      .title-line span {
+        position: static;
+        margin-top: 0.3rem;
+      }
+
+      .card-p-uni {
+      text-align: center;
+      }
+
+
+    }
+
+
+    .icon-copy-wrapper {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  color: var(--accent);
+  margin-right: 10px;
+}
+
+.email-tooltip {
+  position: absolute;
+  bottom: -1.5em;
+  left: 0;
+  background-color: #333;
+  color: white;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.icon-copy-wrapper:hover .email-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.download-btn {
+  display: inline-block;
+  background-color: var(--accent);
+  color: black;
+  padding: 0px 0px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #0078e7; /* darker accent */
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+
+<button class="toggle-btn" onclick="toggleMode()" id="modeToggle">
+  <i class="fa-solid fa-sun" style="color: #74C0FC;"></i>
+</button>
+
+
+<div class="page-wrapper">
+
+<div class="tooltip" id="tooltip"></div>
+
+<nav class="navbar">
+  <a href="{% url 'home' %}" class="nav-item {% if request.path == '/' %}active{% endif %}" data-tooltip="Home">
+    <i class="fas fa-house-chimney"></i>
+  </a>
+  <a href="{% url 'about' %}" class="nav-item {% if request.path == '/about/' %}active{% endif %}" data-tooltip="About">
+    <i class="fas fa-user-astronaut"></i>
+  </a>
+  <a href="{% url 'project_list' %}" class="nav-item {% if request.path == '/projects/' %}active{% endif %}" data-tooltip="Projects">
+    <i class="fas fa-diagram-project"></i>
+  </a>
+  <a href="{% url 'thought_list' %}" class="nav-item {% if request.path == '/thoughts/' %}active{% endif %}" data-tooltip="Thoughts">
+    <i class="fas fa-pen-nib"></i>
+  </a>
+</nav>
+
+<div class="container">
+
+
+  <div class="header">
+    <img src="{% static 'profil.jpg' %}" alt="Profile Picture" class="profile-pic">
+    <div class="info">
+      <h1>M. Fatih Dinç</h1>
+      <p>Engineer, AI master student with interest in ML, Computer Vision, Deep Learning</p>
+
+<p>
+
+  <span class="icon-copy-wrapper" onclick="copyEmail()">
+  <i class="fas fa-envelope"></i>
+  <span class="email-tooltip" id="email-tooltip">mfatihdinc61@yaani.com</span>
+</span>
+
+
+  <a href="https://github.com/mfatihdinc61" class="link" target="_blank" title="GitHub">
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="https://linkedin.com/in/mfatihdinc61" class="link" target="_blank" title="LinkedIn">
+    <i class="fab fa-linkedin"></i>
+  </a>
+
+<a href="{% static 'pdf/Resume.pdf' %}" download class="download-btn">
+  <i class="fas fa-download"></i>
+</a>
+
+
+
+</p>
+
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <h2>Skills</h2>
+  <p>
+    <span class="tag">Python</span>
+    <span class="tag">MATLAB</span>
+    <span class="tag">PyTorch</span>
+    <span class="tag">Django</span>
+    <span class="tag">Flask</span>
+    <span class="tag">OpenCV</span>
+    <span class="tag">Deep Learning</span>
+  </p>
+
+  <h2>Experience</h2>
+  <div class="card">
+    <img src="{% static 'iu-bbtf.png' %}" class="card-img" alt="Company 1 Logo">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>Research Assistant</strong>
+        <span>February 2024 – March 2025</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">I worked at <span style="font-weight:bold"><i>Istanbul University</i></span>, Faculty of Computer and Information Technologies, mainly doing research, developing projects, helping newly established faculty foster, problem-solving for undergraduate students.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="{% static 'tsk.png' %}" class="card-img" alt="Company 2 Logo">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>Reserve Officer</strong>
+        <span>February 2023 – February 2024</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">Served in the <span style="font-weight:bold"><i>Turkish Army</i></span> for one year as a MEBS (Information and Electronics Systems) officer. Time mostly spent on creating solutions for technical problems for some of the garrisons of TSK </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="{% static 'baykar.jpg' %}" class="card-img" alt="Company 3 Logo">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>Engineer Intern</strong>
+        <span>August 2019 – September 2019</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">I worked in the mechanical systems department as Engineer Intern and took part in the assembly process of the AKINCI UAV at <span style="font-weight:bold"><i>Baykar Technologies</i></span></p>
+    </div>
+  </div>
+
+  <h2>Education</h2>
+  <div class="card">
+    <img src="{% static 'bogazici.png' %}" class="card-img" alt="School Logo">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>MSc – Data Science & AI</strong>
+        <span>2023 – (continues)</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;" class = "card-p-uni">Bogazici University</p>
+    </div>
+  </div>
+
+    <div class="card">
+    <img src="{% static 'metu.png' %}" class="card-img" alt="School Logo">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>BSc – Mechanical Eng. (Double Major)</strong>
+        <span>2016 – 2022</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;" class = "card-p-uni">Middle East Technical University</p>
+    </div>
+  </div>
+
+      <div class="card">
+    <img src="{% static 'metu.png' %}" class="card-img" alt="School Logo">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>BSc – Economics</strong>
+        <span>2015 – 2020</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;" class = "card-p-uni">Middle East Technical University</p>
+    </div>
+  </div>
+
+
+  <h2>Certificates</h2>
+
+    <div class="card">
+    <img src="{% static 'british_council_logo.jpg' %}" class="card-img" alt="Company 1 Logo">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>IELTS Academic</strong>
+        <span>27/01/2023</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">I had 7.5 out of 9, to see the details and the document, click <a href="{% static 'ielts.jpg' %}" style="text-decoration: none; color: white;"><i>here</i></a>
+</p>
+    </div>
+  </div>
+
+
+    <div class="card">
+    <img src="{% static 'brainnest.png' %}" class="card-img" alt="Company 1 Logo">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>Python Development of Industry Training</strong>
+        <span>27/01/2023</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">I had a training of 20+ hours from German Consulting Company 'Brainnest', concentrated on industrial usage of Python, certificate is <a href="{% static 'brainnest-certificate.png' %}" style="text-decoration: none; color: white;"><i>here</i></a>
+</p>
+    </div>
+  </div>
+
+        <div class="card">
+    <img src="{% static 'matlab.png' %}" class="card-img" alt="Udemy">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>Simulink on Ramp</strong>
+        <span>28/03/2021</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">MATLAB Simulink training with interactive applications, certificate is <a href="{% static 'simulink.png' %}" style="text-decoration: none; color: white;"><i>here</i></a>
+</p>
+    </div>
+  </div>
+
+    <div class="card">
+    <img src="{% static 'udemy-logo.png' %}" class="card-img" alt="Udemy">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>Advanced Python Programming: Build 10 OOP Applications</strong>
+        <span>19/10/2022</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">Comprehensive course in which I built 10 apps from scratch using OOP techniques, to see the certificate, click <a href="{% static 'udemy-oop.png' %}" style="text-decoration: none; color: white;"><i>here</i></a>
+</p>
+    </div>
+  </div>
+
+      <div class="card">
+    <img src="{% static 'udemy-logo.png' %}" class="card-img" alt="Udemy">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>MySQL for Data Analytics and Business Intelligence</strong>
+        <span>28/03/2021</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">MySQL for Data Analytics and Business Intelligence, had many exercises, certificate is <a href="{% static 'udemy-sql.png' %}" style="text-decoration: none; color: white;"><i>here</i></a>
+</p>
+    </div>
+  </div>
+
+      <div class="card">
+    <img src="{% static 'udemy-logo.png' %}" class="card-img" alt="Udemy">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>MATLAB Training Set</strong>
+        <span>11/05/2020</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">Very extensive course on MATLAB, didn't only sharpen my skills on MATLAB, but also at programming, certificate is <a href="{% static 'matlab-certif.png' %}" style="text-decoration: none; color: white;"><i>here</i></a>
+</p>
+    </div>
+  </div>
+
+
+      <div class="card">
+    <img src="{% static 'judo.png' %}" class="card-img" alt="Udemy">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>Brown Belt in Judo</strong>
+        <span>31/10/2022</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">After years of training, reached the brown belt in Judo, certificate is <a href="{% static 'judo-img.png' %}" style="text-decoration: none; color: white;"><i>here</i></a>
+</p>
+    </div>
+  </div>
+
+
+      <div class="card">
+    <img src="{% static 'the_old_bridge.png' %}" class="card-img" alt="Udemy">
+    <div class="card-content">
+      <div class="title-line">
+        <strong>Certification of Old Bridge Jump</strong>
+        <span>05/04/2025</span>
+      </div>
+      <p style="margin-block-start: 0em; margin-block-end: 0em;">Jumped off from the Old Bridge to Neretva River in Mostar, Bosnia-Herzegovina, ranked as 4357th official jumper of the bridge, certificate is <a href="{% static 'ob-cert.png' %}" style="text-decoration: none; color: white;"><i>here</i></a>
+</p>
+    </div>
+  </div>
+
+
+</div>
+</div>
+
+
+<script>
+function copyEmail() {
+  const email = "mfatihdinc61@yaani.com";
+  navigator.clipboard.writeText(email).then(() => {
+    const tooltip = document.getElementById("email-tooltip");
+    tooltip.textContent = "Copied!";
+    setTimeout(() => {
+      tooltip.textContent = email;
+    }, 1500);
+  });
+}
+
+</script>
+
+
+
+<script>
+    document.body.classList.add("dark");
+    function toggleMode() {
+        document.body.classList.toggle("light");
+        document.body.classList.toggle("dark");
+
+        const btn = document.getElementById('modeToggle');
+        const icon = btn.querySelector('i');
+
+          if (icon.classList.contains('fa-moon')) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+            // Optional: apply light mode styles here
+          } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+            // Optional: apply dark mode styles here
+          }
+    }
+</script>
+
+
+
+<script>
+  function toggleMenu() {
+    const navLinks = document.getElementById("nav-links");
+    navLinks.classList.toggle("show");
+  }
+</script>
+
+
+
+<script>
+  const tooltip = document.getElementById('tooltip');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  navItems.forEach(item => {
+    item.addEventListener('mouseenter', (e) => {
+      tooltip.innerText = item.getAttribute('data-tooltip');
+      tooltip.style.opacity = 1;
+    });
+
+    item.addEventListener('mousemove', (e) => {
+      tooltip.style.left = (e.pageX + 12) + 'px';
+      tooltip.style.top = (e.pageY + 12) + 'px';
+    });
+
+    item.addEventListener('mouseleave', () => {
+      tooltip.style.opacity = 0;
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
