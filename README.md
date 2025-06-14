@@ -1,4 +1,4 @@
-# 🧑‍💻 Personal Portfolio Website — mfatihdinc.com
+# 🧑‍💻 My Portfolio Website — mfatihdinc.com
 
 This is the source code of my portfolio website [mfatihdinc.com](https://mfatihdinc.com), where I showcase my projects, research interests, thoughts, and more.
 
@@ -22,14 +22,14 @@ This is the source code of my portfolio website [mfatihdinc.com](https://mfatihd
 ## 🗂 Project Structure (Simplified)
 
 mysite/
-├── personal/ # Main Django app (views, models, urls, etc.)
-│ ├── templates/
-│ └── static/
-├── staticfiles/ # Static files collected by Django
-├── media/ # Uploaded media (optional)
-├── manage.py
-├── requirements.txt
-└── passenger_wsgi.py # Entry point for cPanel Passenger
+├── personal/ # Main Django app (views, models, urls, etc.) 
+│ ├── templates/ 
+│ └── static/ 
+├── staticfiles/ # Static files collected by Django 
+├── media/ # Uploaded media (optional) 
+├── manage.py 
+├── requirements.txt 
+└── passenger_wsgi.py # Entry point for cPanel Passenger 
 
 
 ## 🛠 Setup & Deploy (Quick)
